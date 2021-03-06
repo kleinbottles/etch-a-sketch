@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <title>Etch-a-Sketch 2.0</title>
+</head>
+
+<body>
+    <main id="main-content">
+        <div id="device">
+            <div id="title"><h1>etch-a-sketch</h1></div>
+            <div id="screen">
+
+            </div>
+            <button id="restart">!</button>
+            <button id="set-grid">?</button>
+
+        </div>
+    </main>
+
+    <script>
+         
+        const device = document.querySelector('#device');
+        const screen = document.querySelector('#screen');
+        const restart = document.querySelector('#restart');
+        const setGrid = document.querySelector("#set-grid");
+
+        
+        
+
+        function createGrid(rows, columns) {
+            screen.setAttribute('style', `grid-template-columns: repeat(${columns}, 1fr); grid-template-rows: repeat(${rows}, 1fr)`);
+            
+            for (let i = 0; i < rows*columns; i++){
+                box = document.createElement('div');
+                box.classList.add('box');
+                screen.appendChild(box);
+                box.addEventListener('mouseover', changeState);
+                console.log(i);
+
+            }
+        }
+
+        function changeState(e){
+            console.log(e);
+            this.classList.add('mouseover');
+        }
+
+        function restartGrid () {
+            boxes = document.querySelectorAll('.box');
+            boxes.forEach(box => box.classList.remove('mouseover'));
+        }
+        
+        function letPlayerCreateGrid() {
+            screen.innerHTML ='';
+            gridSize = prompt("How many tiles per side?");
+            createGrid(gridSize, gridSize);
+        }
+
+        restart.addEventListener('click', restartGrid);
+        setGrid.addEventListener('click', letPlayerCreateGrid); 
+        //creates an initial grid 
+        createGrid(24,24);      
+        
+
+    </script>
+</body>
+
+
+
+</html>
